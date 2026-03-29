@@ -8,6 +8,22 @@ from datetime import datetime
 import time
 from pathlib import Path
 
+# ── Simple Password Protection ──
+def check_password():
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+    if not st.session_state.authenticated:
+        pwd = st.text_input("Enter Password", type="password")
+        if st.button("Login"):
+            if pwd == st.secrets["APP_PASSWORD"]:
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Incorrect password")
+        st.stop()
+
+check_password()
+
 st.set_page_config(
     page_title="SMC OB Scanner v2 | NSE",
     page_icon="📊",
