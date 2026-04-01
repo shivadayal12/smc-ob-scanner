@@ -522,6 +522,7 @@ with tab_scan:
                 m4.metric("BOS Confirmed",  len(df_clean[df_clean["BOS"] == "YES"]))
                 m5.metric("RS > 1 (N50)",   len(df_clean[df_clean["RS vs N50"] > 1.0]))
 
+                                # ---- Results Table ----
                 st.markdown("### Scan Results")
 
                 display_cols = [
@@ -533,7 +534,7 @@ with tab_scan:
                     "OB High", "OB Low", "SL Suggest"
                 ]
 
-                                def color_score(val):
+                def color_score(val):
                     if val >= 90:
                         return "color: #26a69a; font-weight: bold"
                     elif val >= 60:
@@ -578,6 +579,7 @@ with tab_scan:
                         "OB Low":        "Rs {:.2f}",
                     })
                 )
+
                 st.dataframe(styled, use_container_width=True, height=450)
 
                 st.markdown("### Export")
