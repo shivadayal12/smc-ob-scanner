@@ -533,25 +533,36 @@ with tab_scan:
                     "OB High", "OB Low", "SL Suggest"
                 ]
 
-                def color_score(val):
-                    if val >= 90:    return "color: #26a69a; font-weight: bold"
-                    elif val >= 60:  return "color: #f39c12; font-weight: bold"
-                    else:            return "color: #ef5350"
+                                def color_score(val):
+                    if val >= 90:
+                        return "color: #26a69a; font-weight: bold"
+                    elif val >= 60:
+                        return "color: #f39c12; font-weight: bold"
+                    else:
+                        return "color: #ef5350"
 
                 def color_rs(val):
-                    if val >= 1.5:   return "color: #26a69a; font-weight: bold"
-                    elif val >= 1.0: return "color: #f39c12"
-                    else:            return "color: #ef5350"
+                    if val >= 1.5:
+                        return "color: #26a69a; font-weight: bold"
+                    elif val >= 1.0:
+                        return "color: #f39c12"
+                    else:
+                        return "color: #ef5350"
 
                 def color_dist_ath(val):
-                    if val >= -10:   return "color: #ef5350"
-                    elif val >= -30: return "color: #f39c12"
-                    else:            return "color: #26a69a; font-weight: bold"
+                    if val >= -10:
+                        return "color: #ef5350"
+                    elif val >= -30:
+                        return "color: #f39c12"
+                    else:
+                        return "color: #26a69a; font-weight: bold"
 
-                styled = df_clean[display_cols].style \
-                    .applymap(color_score,    subset=["Score"]) \
-                    .applymap(color_rs,       subset=["RS vs N50", "RS vs N500"]) \
-                    .applymap(color_dist_ath, subset=["Dist ATH Pct"]) \
+                styled = (
+                    df_clean[display_cols]
+                    .style
+                    .map(color_score,    subset=["Score"])
+                    .map(color_rs,       subset=["RS vs N50", "RS vs N500"])
+                    .map(color_dist_ath, subset=["Dist ATH Pct"])
                     .format({
                         "Price (Rs)":    "Rs {:.2f}",
                         "RVOL":          "{:.2f}x",
@@ -566,7 +577,7 @@ with tab_scan:
                         "OB High":       "Rs {:.2f}",
                         "OB Low":        "Rs {:.2f}",
                     })
-
+                )
                 st.dataframe(styled, use_container_width=True, height=450)
 
                 st.markdown("### Export")
